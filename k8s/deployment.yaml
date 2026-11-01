@@ -6,7 +6,7 @@ metadata:
   labels:
     app: campusroll
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: campusroll
@@ -31,7 +31,7 @@ spec:
               containerPort: 3000
           env:
             - name: BANNER_MESSAGE # change this in Git to demo GitOps
-              value: "Student Information System"
+              value: "DYPIU - SCSEA Student Portal"
           resources:
             requests:
               cpu: 50m
