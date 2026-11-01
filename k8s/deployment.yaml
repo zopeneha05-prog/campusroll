@@ -21,16 +21,16 @@ spec:
         app: campusroll
     spec:
       imagePullSecrets:
-        - name: ecr-pull       # created by cluster/ecr-pull-secret.sh (kind only)
+        - name: ecr-pull # created by cluster/ecr-pull-secret.sh (kind only)
       containers:
         - name: campusroll
           # updated automatically by GitHub Actions - do not edit by hand
-          image: 471116065580.dkr.ecr.ap-south-1.amazonaws.com/campusroll:v0
+          image: 471116065580.dkr.ecr.ap-south-1.amazonaws.com/campusroll:v9
           ports:
             - name: http
               containerPort: 3000
           env:
-            - name: BANNER_MESSAGE      # change this in Git to demo GitOps
+            - name: BANNER_MESSAGE # change this in Git to demo GitOps
               value: "Student Information System"
           resources:
             requests:
