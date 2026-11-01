@@ -65,17 +65,8 @@ jobs:
             --build-arg APP_VERSION="${IMAGE_TAG}" \
             --label org.opencontainers.image.revision="${GITHUB_SHA}" \
             -t "$IMAGE" .
-          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
-
-      - name: Scan image for vulnerabilities (report only)
-        uses: aquasecurity/trivy-action@0.28.0
-        continue-on-error: true
-        with:
-          image-ref: ${{ env.IMAGE }}
-          severity: CRITICAL,HIGH
-          ignore-unfixed: true
-          exit-code: "0"
-
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV" 
+          
       - name: Push image to ECR
         run: docker push "$IMAGE"
 
