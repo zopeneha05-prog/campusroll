@@ -1,0 +1,10 @@
+# Minimal Helm values for Argo CD on a small kind cluster
+configs:
+  params:
+    server.insecure: true        # TLS is handled by the SSH tunnel for the demo
+  cm:
+    timeout.reconciliation: 60s  # poll Git every 60s instead of 180s (faster demo)
+dex:
+  enabled: false
+notifications:
+  enabled: false

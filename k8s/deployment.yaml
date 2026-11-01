@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: campusroll
+  namespace: campusroll
+  labels:
+    app: campusroll
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: campusroll
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: campusroll
+    spec:
+      imagePullSecrets:
+        - name: ecr-pull       # created by cluster/ecr-pull-secret.sh (kind only)
+      containers:
+        - name: campusroll
+          # updated automatically by GitHub Actions - do not edit by hand
+          image: 471116065580.dkr.ecr.ap-south-1.amazonaws.com/campusroll:v0
+          ports:
+            - name: http
+              containerPort: 3000
+          env:
+            - name: BANNER_MESSAGE      # change this in Git to demo GitOps
+              value: "Student Information System"
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 300m
+              memory: 192Mi
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: http
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10

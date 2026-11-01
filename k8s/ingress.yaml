@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: campusroll
+  namespace: campusroll
+  annotations:
+    # data is in memory per pod -> keep each browser on the same pod
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "campusroll-pod"
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:                  # no host -> works on http://<EC2-PUBLIC-IP>/
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: campusroll
+                port:
+                  number: 80
