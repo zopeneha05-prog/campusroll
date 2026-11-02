@@ -25,7 +25,7 @@ spec:
       containers:
         - name: campusroll
           # updated automatically by GitHub Actions - do not edit by hand
-          image: 471116065580.dkr.ecr.ap-south-1.amazonaws.com/campusroll:v11
+          image: 471116065580.dkr.ecr.ap-south-1.amazonaws.com/campusroll:v10
           ports:
             - name: http
               containerPort: 3000
