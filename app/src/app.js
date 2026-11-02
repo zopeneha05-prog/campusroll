@@ -14,7 +14,7 @@ function createApp({ withSeed = true } = {}) {
   // Info used by the frontend header/footer (shows which version & pod served the page)
   app.get('/api/info', (req, res) => {
     res.json({
-      appName: 'CampusRoll',
+      appName: 'DYPIU Student Hub',
       banner: process.env.BANNER_MESSAGE || 'Student Information System',
       version: process.env.APP_VERSION || 'dev',
       pod: os.hostname(),
